@@ -152,4 +152,8 @@ Once the workflow has completed we can head to our Azure Portal and view the dep
 
 Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date".
 
-To start with we will need to create a new branch for our 
+To start with we will need to create a new branch for our feature change. To do this we can use the following command. 
+
+```shell 
+git checkout -b duedate
+```
