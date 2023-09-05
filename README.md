@@ -35,6 +35,7 @@ To start with for this workshop you will need to fork this repository. This can 
 <img width="1168" alt="FORK" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/111a2a58-fe54-433d-9674-4e29251dede8">
 
 
+
 Once this repository is forked you will have your own version of the repository. This will allow us to push our own code changes. 
 
 ## 2. Create the static web app resource.
