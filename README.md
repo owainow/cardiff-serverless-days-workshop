@@ -70,7 +70,7 @@ Take note of that token as we will need it later for our GitHub Actions.
 We can create a new Azure SQL server using the following command:
 
 ```shell
-az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user serverlessadmin --admin-password C@rdiffServerless2023
+az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiff-serverless --admin-password C@rdiffServerless2023
 ```
 We can then set our signed in user as the AD Admin. To do this we will require our user object id:
 
@@ -87,13 +87,13 @@ az ad signed-in-user show --query displayName -o tsv
 The create the AD admin in Azure SQL server:
 
 ```shell
-az sql server ad-admin create --display-name serverlessadmin --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
+az sql server ad-admin create --display-name cardiff-serverless --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
 ```
 
 We now need to ensure that Azure Services can connect to the created Azure SQL server:
 
 ```shell
-az sql server firewall-rule create -n AllowAllWindowsAzureIps -g <resource-group> --server <server-name> --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+az sql server firewall-rule create -n AllowAllWindowsAzureIps -g cardiff-serverless-days --server cardiff-serverless-days-db --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
 ```
 
 This is an open firewall rule and certainly not advisable outside of the context of this workshop. To learn more  about how to configure an Azure SQL firewall click here: [Connections from inside Azure](https://learn.microsoft.com/azure/azure-sql/database/firewall-configure?view=azuresql#connections-from-inside-azure)
@@ -108,7 +108,9 @@ The first thing we need to do is create a service principal that has contributor
 
 ```shell 
 az ad sp create-for-rbac -n serverless-days-cardiff-2023-sp --skip-assignment
+```
 
+```shell 
 az role assignment create --assignee <SP ID>  --role Contributor --scope /subscriptions/<Subscription_ID>/resourceGroups/cardiff-serverless-days
 ```
 
@@ -135,6 +137,8 @@ az sql db show-connection-string -s cardiff-serverless-days-db -n TodoDB -c ado.
 ```
 
 You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier. 
+
+If you are following the tutorial names this will be cardiff-serverless & C@rdiffServerless2023
 
 `AZURE_SQL_CONNECTION_STRING : Custom SQL connection string value`
 
