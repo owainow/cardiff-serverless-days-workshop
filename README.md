@@ -73,7 +73,7 @@ Take note of that token as we will need it later for our GitHub Actions.
 We can create a new Azure SQL server using the following command:
 
 ```shell
-az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiff-serverless --admin-password C@rdiffServerless2023
+az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password C@rdiffS3rv3rless2023
 ```
 We can then set our signed in user as the AD Admin. To do this we will require our user object id:
 
@@ -81,16 +81,11 @@ We can then set our signed in user as the AD Admin. To do this we will require o
 az ad signed-in-user show --query id -o tsv
 ```
 
-We then need to obtain our display name:
+
+Then create the AD Admin for our server.
 
 ```shell
-az ad signed-in-user show --query displayName -o tsv
-```
-
-The create the AD admin in Azure SQL server:
-
-```shell
-az sql server ad-admin create --display-name cardiff-serverless --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
+az sql server ad-admin create --display-name <yourfirstname> --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
 ```
 
 We now need to ensure that Azure Services can connect to the created Azure SQL server:
@@ -139,9 +134,9 @@ And then we need to retrive our SQL Connection string. We can do that with the f
 az sql db show-connection-string -s cardiff-serverless-days-db -n TodoDB -c ado.net
 ```
 
-You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier. 
+You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier at the point we created the database
 
-If you are following the tutorial names this will be cardiff-serverless & C@rdiffServerless2023
+If you are following the tutorial names this will be cardiffserverless & C@rdiffS3rv3rless2023.
 
 `AZURE_SQL_CONNECTION_STRING : Custom SQL connection string value`
 
@@ -155,4 +150,6 @@ Once the workflow has completed we can head to our Azure Portal and view the dep
 
 ## 7. New application feature
 
-Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date"
+Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date".
+
+To start with we will need to create a new branch for our 
