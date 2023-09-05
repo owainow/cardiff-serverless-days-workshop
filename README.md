@@ -116,17 +116,17 @@ We can then create 3 GitHub Actions with the output from the first command. The 
 
 We need to create the following individual secrets for use in our deployment pipeline:
 
-### AZURE_CLIENT_ID : appId
-### AZURE_CLIENT_SECRET : password
-### AZURE_TENANT_ID : tenat
+`AZURE_CLIENT_ID : appId`
+`AZURE_CLIENT_SECRET : password`
+`AZURE_TENANT_ID : tenat`
 
 We can also then create our Azure subscription secret by copying the subscription ID from the Azure Portal.
 
-### SUBSCRIPTION_ID : Subscription ID
+`SUBSCRIPTION_ID : Subscription ID`
 
 We finally need to create two secrets from our earlier commands. The first is the "AZURE_STATIC_WEB_APPS_API_TOKEN" which you should have noted down earlier.
 
-### AZURE_STATIC_WEB_APPS_API_TOKEN : API Token value
+`AZURE_STATIC_WEB_APPS_API_TOKEN : API Token value`
 
 And then we need to retrive our SQL Connection string. We can do that with the following (don't worry if the TodoDB database doesn't exist yet, it will be created later automatically):
 
@@ -136,7 +136,7 @@ az sql db show-connection-string -s cardiff-serverless-days-db -n TodoDB -c ado.
 
 You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier. 
 
-### AZURE_SQL_CONNECTION_STRING : Custom SQL connection string value
+`AZURE_SQL_CONNECTION_STRING : Custom SQL connection string value`
 
 ## 5. Run the pipeline
 
