@@ -165,3 +165,21 @@ We can then publish the branch in our remote repository with the following comma
 ```shell 
 git push -u origin duedate
 ```
+
+We now need to make our first branch specific code change. We need to change our GitHub Action to be triggered by the new branch. Within our GitHub Action manifest we need to add the following to our triggers:
+
+```yaml
+on:
+  workflow_dispatch:    
+  push:
+    branches:
+      - main
+      - duedate
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+      - duedate
+```
+
+Once we have made this chance to our local files we can then save it, commit and push it to our branch. 

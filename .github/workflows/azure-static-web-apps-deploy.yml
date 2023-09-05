@@ -5,10 +5,12 @@ on:
   push:
     branches:
       - main
+      - duedate
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+      - duedate
 
 jobs:
   build_and_deploy_job:
