@@ -38,6 +38,7 @@ To start with for this workshop you will need to fork this repository. This can 
 
 Once this repository is forked you will have your own version of the repository. This will allow us to push our own code changes. 
 
+
 ## 2. Create the static web app resource.
 
 To start with we will need to login to our Azure Account. For this we will use the Azure CLI. We will use the interactive portal to login using the following command:
