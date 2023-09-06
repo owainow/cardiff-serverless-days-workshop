@@ -6,34 +6,31 @@
       <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
         @keyup.enter="addTodo" />
     </header>
-  <div class="div1"> 
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
-            <div class="view">
-              <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-              <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
-            </div>
+          <div class="view">
+            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+            <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
+          </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" />
         </li>
       </ul>
     </section>
-    </div>
-    <div class="div2">
         <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
-            <div class="view">
-              <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
-              <button class="destroy" @click="removeTodo(todo)"></button>
-            </div>
+          <div class="view">
+          
+            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
+            <button class="destroy" @click="removeTodo(todo)"></button>
+          </div>
         </li>
       </ul>
     </section>
-    </div>
     <footer class="footer" v-show="todos.length">
       <span class="todo-count">
         <strong>{{ activeTodos.length }}</strong> {{ pluralize('item', activeTodos.length) }} left

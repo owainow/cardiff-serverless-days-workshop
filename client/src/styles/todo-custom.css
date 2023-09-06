@@ -23,7 +23,6 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-.div1,
-.div2 {
+.view {
   float: left;
 }
