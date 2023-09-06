@@ -5,7 +5,7 @@
       <h2 v-if="isLoading">Loading...</h2>     
       <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
         />
-      <div class ="float"
+      <div class="float">
       <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
         @keyup.enter="addTodo", "addDuedate" />
       </div>
