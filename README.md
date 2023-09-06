@@ -146,11 +146,20 @@ If you are following the tutorial names this will be cardiffserverless & C@rdiff
 
 The first time we trigger this pipeline we will use a manual trigger. To do this we will head to the Actions section at the top of the page. Then we will click on our Azure Static Web Apps workflow which has been created already and then click "Run Workflow". We can monitor the progress of the workflow by clicking into the running workflow and viewing the steps. 
 
-## 6. View the Application
+## 6. Configure the Static Web App Database Connection
+
+Once the deployment has completed, navigate to the Static Web App resource in the Azure Portal and click on the [Database connection](https://learn.microsoft.com/azure/static-web-apps/database-azure-sql?tabs=bash&pivots=static-web-apps-rest) item under *Settings*. Click on *Link existing database* to connect to the Azure SQL server and the TodoDB that was created by the deployment.
+
+You can use the sample application user that is created during the [database deployment phase](./database/TodoDB/Script.PostDeployment.sql):
+
+- User: `todo_dab_user`
+- Password: `rANd0m_PAzzw0rd!`
+
+## 7. View the Application
 
 Once the workflow has completed we can head to our Azure Portal and view the deployment. Type "Static Web Apps" in the search bar and select the static web app. You should see a SWA called "cardiff-serverless-days-webapp". Once you click through you should be able to see the public URL. Click on the URL and add a new todo to the list. We can see we now have a fully functioning static web app. Below the app is also login capabilites using GitHub as the IDP allowing you to create a persisted todo list. 
 
-## 7. New application feature
+## 8. New application feature
 
 Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date".
 
