@@ -28,11 +28,6 @@
       "rest": {
         "path": "todo"
       },
-      "Duedate": {
-        "source": "dbo.duedate",
-        "rest": {
-          "path": "duedate"
-        },
       "permissions": [
         {
           "role": "anonymous",
