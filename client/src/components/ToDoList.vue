@@ -11,23 +11,15 @@
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
-            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
+            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+            <div class ="float">
+            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
+            </div> 
+            <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" />
-        </li>
-      </ul>
-    </section>
-        <section class="main" v-show="todos.length">
-      <ul class="todo-list">        
-        <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
-          draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
-          <div class="view">
-          
-            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
-            <button class="destroy" @click="removeTodo(todo)"></button>
-          </div>
         </li>
       </ul>
     </section>
