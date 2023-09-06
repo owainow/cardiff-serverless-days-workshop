@@ -201,3 +201,38 @@ We also need to add an additional parameter to our workflow file. This is to spe
           production_branch: "main"
 ```
 Once we have made this chance to our local files we can then save it, commit and push it to our branch. 
+
+We now need to make some changes to our database config and add an additional collumn. We can do this by editing our dbo.todos.sql file:
+
+```sql
+    ...
+	[position] INT NULL,
+	[duedate] [DATE] NOT NULL
+```
+
+We also will then need to populate our database once it is deployed. We can do this by adding the following to the existing sql in the Script.PostDeployment.sql
+
+```sql
+insert into dbo.todos 
+(
+    [id],
+    [title],
+	[completed],
+	[owner_id],
+	[position],
+    [duedate]
+) 
+values
+    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, 17/08/2023),
+    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2, 23/04/2024),
+    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', 25/12/2023),
+    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3, 20/11/2023),
+    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5, 25/12/2023)
+;
+```
+
+We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file:
+
+```vue
+
+```

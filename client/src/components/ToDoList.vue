@@ -13,6 +13,7 @@
           <div class="view">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+            <label @dblclick="editTodo(todo)">{{ todo.duedate }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"

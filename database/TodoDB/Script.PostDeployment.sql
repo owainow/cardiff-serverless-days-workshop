@@ -38,14 +38,15 @@ insert into dbo.todos
     [title],
 	[completed],
 	[owner_id],
-	[position]
+	[position],
+    [duedate]
 ) 
 values
-    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1),
-    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2),
-    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', 4),
-    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3),
-    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5)
+    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, 17/08/2023),
+    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2, 23/04/2024),
+    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', 25/12/2023),
+    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3, 20/11/2023),
+    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5, 25/12/2023)
 ;
 
 if (object_id('tempdb..#todos_order') is not null)
