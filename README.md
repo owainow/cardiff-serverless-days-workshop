@@ -191,4 +191,13 @@ on:
       - duedate
 ```
 
+We also need to add an additional parameter to our workflow file. This is to specify the production branch that we want to use. This means that when using a branch to build from other then the specified branch we will create "Preview" or a test enviroment. 
+
+```yaml
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          production_branch: "main"
+```
 Once we have made this chance to our local files we can then save it, commit and push it to our branch. 
