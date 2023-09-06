@@ -19,5 +19,5 @@ ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [completed]
 GO
 ALTER TABLE [dbo].[todos] ADD  DEFAULT ('public') FOR [owner_id]
 GO
-ALTER TABLE [dbo].[todos] ADD  DEFAULT (17-08-2024) FOR [duedate]
+ALTER TABLE [dbo].[todos] ADD  DEFAULT (17082024) FOR [duedate]
 GO
