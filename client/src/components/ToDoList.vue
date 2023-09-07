@@ -8,7 +8,7 @@
     </header>
       <div class ="float">
       <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
-        @keyup.enter="addTodo", "addDuedate />
+        @keyup.enter="addTodo", "addDuedate" />
       </div>
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
