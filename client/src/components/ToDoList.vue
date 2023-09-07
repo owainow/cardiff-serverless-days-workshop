@@ -9,9 +9,6 @@
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
-          <div class ="float">
-            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
-          </div> 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
@@ -272,4 +269,3 @@ export default {
 };
 
 </script>
-
