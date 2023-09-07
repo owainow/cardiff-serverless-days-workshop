@@ -5,21 +5,19 @@
       <h2 v-if="isLoading">Loading...</h2>     
       <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
         />
-      <div class="float">
       <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
         @keyup.enter="addTodo", "addDuedate" />
-      </div>
     </header>
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
+          <div class ="float">
+            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
+          </div> 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-            <div class ="float">
-            <label @dblclick="editTodo(duedate)">{{ todo.duedate }}</label>
-            </div> 
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
