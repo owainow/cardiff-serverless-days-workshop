@@ -187,7 +187,7 @@ export default {
     },
     addDuedate: function () {
       var value = this.newDuedate && this.newDuedate.trim();
-      var newDate = new Date(value)
+      var newDate = new Date(value);
       var value1 = this.newTodo && this.newTodo.trim();
       if (!value && !newDate) return;
       fetch(API, {
