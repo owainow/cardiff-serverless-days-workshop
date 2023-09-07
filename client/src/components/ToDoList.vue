@@ -5,11 +5,9 @@
       <h2 v-if="isLoading">Loading...</h2>     
       <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
         @keyup.enter="addTodo" />
+      <input class="new-duedate" autofocus autocomplete="off" placeholder="When does this need to be done?" v-model="newTodo"
+        @keyup.enter="addDuedate" />
     </header>
-      <div class ="float">
-      <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
-        @keyup.enter="addTodo", "addDuedate" />
-      </div>
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
