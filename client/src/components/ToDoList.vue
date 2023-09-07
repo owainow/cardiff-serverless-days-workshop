@@ -5,13 +5,7 @@
       <h2 v-if="isLoading">Loading...</h2>     
       <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
         @keyup.enter="addTodo" />
-      <input class="new-duedate" autofocus autocomplete="off" placeholder="When does this need to be done?" v-model="newTodo"
-        @keyup.enter="addDuedate" />
     </header>
-      <div class ="float">
-      <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
-        @keyup.enter="addTodo", "addDuedate" />
-      </div>
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
@@ -49,10 +43,13 @@
   </section>
   <UserInfo :userDetails="userDetails" />
 </template>
+
 <script lang="js">
 import UserInfo from './UserInfo.vue'
+
 const API = "/data-api/rest/todo";
 const HEADERS = { 'Accept': 'application/json', 'Content-Type': 'application/json;charset=utf-8' };
+
 var filters = {
   all: function (todos) {
     return todos;
@@ -64,10 +61,12 @@ var filters = {
     return todos.filter(todo => { return todo.completed; });
   }
 };
+
 export default {
   components: {
     UserInfo
   },
+
   data() {
     return {
       todos: [],
@@ -79,6 +78,7 @@ export default {
       userDetails: null
     };
   },
+
   mounted() {
     var visibility = window.location.hash.replace(/#\/?/, "");
     if (filters[visibility]) {
@@ -87,6 +87,7 @@ export default {
       window.location.hash = "";
       this.visibility = "all";
     }
+
     fetch('/.auth/me')
       .then(res => {
         return res.json()
@@ -99,11 +100,15 @@ export default {
     
     this.getTodos();
   },
+
   computed: {
     activeTodos: function () { return filters["active"](this.todos) },
+
     completedTodos: function () { return filters["completed"](this.todos) },
+
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
   },
+
   watch: {
     isLoading(newValue) {
       if (newValue == true) {
@@ -114,6 +119,7 @@ export default {
       } 
     }
   },
+
   methods: {
     
     dragStart: function(evt, todo) {      
@@ -121,6 +127,7 @@ export default {
       evt.dataTransfer.effectAllowed = 'move'
       evt.dataTransfer.setData('itemID', todo.id)
     },
+
     dragEnter: function(evt) {
       evt.target.classList.add("drag");
       evt.preventDefault();
@@ -130,6 +137,7 @@ export default {
       evt.target.classList.remove("drag");
       evt.preventDefault();
     },
+
     dragDrop: function(evt, destTodo) {      
       evt.target.classList.remove("drag");   
       const sourceId = evt.dataTransfer.getData('itemID')
@@ -146,12 +154,14 @@ export default {
           method: "PATCH",
           body: JSON.stringify({ order: destTodo.order })
         });
+
       fetch(API + `/id/${sourceTodo.id}`, {
           headers: HEADERS,
           method: "PATCH",
           body: JSON.stringify({ order: sourceTodo.order })
         });
     },
+
     getTodos: function () {
       this.isLoading = true;
       
