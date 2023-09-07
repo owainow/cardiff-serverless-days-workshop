@@ -55,6 +55,40 @@
       "mappings": {
         "position": "order"
       }      
-    }
+    },
+    
+    "Duedate": {
+      "source": "dbo.duedate",
+      "rest": {
+        "path": "duedate"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq 'public'"
+              }
+            }            
+          ]
+        },
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "*",
+              "policy": {
+                "database": "@item.owner_id eq @claims.userId"
+              }
+            }            
+          ]
+        }        
+      ],
+      "mappings": {
+        "position": "order"
+      }  
+  }
   }
 }
