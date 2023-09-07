@@ -3,10 +3,15 @@
     <header class="header">
       <h1>todos</h1>
       <h2 v-if="isLoading">Loading...</h2>     
-      <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo" />
-      <input class="new-duedate" autofocus autocomplete="off" placeholder="Due Date Format: YYYY-MM-DD 23" v-model="newDuedate"
+      <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo"
+        @keyup.enter="addTodo" />
+      <input class="new-duedate" autofocus autocomplete="off" placeholder="When does this need to be done?" v-model="newTodo"
         @keyup.enter="addDuedate" />
     </header>
+      <div class ="float">
+      <input class="new-duedate" autofocus autocomplete="off" placeholder "When does this need to be done YYY-MM-DD?" v-model="newTodo"
+        @keyup.enter="addTodo", "addDuedate" />
+      </div>
     <section class="main" v-show="todos.length">
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
@@ -44,13 +49,10 @@
   </section>
   <UserInfo :userDetails="userDetails" />
 </template>
-
 <script lang="js">
 import UserInfo from './UserInfo.vue'
-
 const API = "/data-api/rest/todo";
 const HEADERS = { 'Accept': 'application/json', 'Content-Type': 'application/json;charset=utf-8' };
-
 var filters = {
   all: function (todos) {
     return todos;
@@ -62,12 +64,10 @@ var filters = {
     return todos.filter(todo => { return todo.completed; });
   }
 };
-
 export default {
   components: {
     UserInfo
   },
-
   data() {
     return {
       todos: [],
@@ -79,7 +79,6 @@ export default {
       userDetails: null
     };
   },
-
   mounted() {
     var visibility = window.location.hash.replace(/#\/?/, "");
     if (filters[visibility]) {
@@ -88,7 +87,6 @@ export default {
       window.location.hash = "";
       this.visibility = "all";
     }
-
     fetch('/.auth/me')
       .then(res => {
         return res.json()
@@ -101,15 +99,11 @@ export default {
     
     this.getTodos();
   },
-
   computed: {
     activeTodos: function () { return filters["active"](this.todos) },
-
     completedTodos: function () { return filters["completed"](this.todos) },
-
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
   },
-
   watch: {
     isLoading(newValue) {
       if (newValue == true) {
@@ -120,7 +114,6 @@ export default {
       } 
     }
   },
-
   methods: {
     
     dragStart: function(evt, todo) {      
@@ -128,7 +121,6 @@ export default {
       evt.dataTransfer.effectAllowed = 'move'
       evt.dataTransfer.setData('itemID', todo.id)
     },
-
     dragEnter: function(evt) {
       evt.target.classList.add("drag");
       evt.preventDefault();
@@ -138,7 +130,6 @@ export default {
       evt.target.classList.remove("drag");
       evt.preventDefault();
     },
-
     dragDrop: function(evt, destTodo) {      
       evt.target.classList.remove("drag");   
       const sourceId = evt.dataTransfer.getData('itemID')
@@ -155,14 +146,12 @@ export default {
           method: "PATCH",
           body: JSON.stringify({ order: destTodo.order })
         });
-
       fetch(API + `/id/${sourceTodo.id}`, {
           headers: HEADERS,
           method: "PATCH",
           body: JSON.stringify({ order: sourceTodo.order })
         });
     },
-
     getTodos: function () {
       this.isLoading = true;
       
@@ -180,11 +169,9 @@ export default {
           this.isLoading = false;
         });
     },
-
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim();
       if (!value) return;
-
       fetch(API, {
         headers: HEADERS,
         method: "POST",
@@ -198,13 +185,11 @@ export default {
         this.todos.push(res.value[0]);
       })
     },
-
     addDuedate: function () {
       var value = this.newDuedate && this.newDuedate.trim();
       var newDate = new Date(value)
       var value1 = this.newTodo && this.newTodo.trim();
       if (!value && !newDate) return;
-
       fetch(API, {
         headers: HEADERS,
         method: "POST",
@@ -218,7 +203,6 @@ export default {
         this.todos.push(res.value[0]);
       })
     },
-
     completeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
@@ -226,7 +210,6 @@ export default {
         body: JSON.stringify({ completed: todo.completed, order: todo.order })
       });
     },
-
     removeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
@@ -238,17 +221,10 @@ export default {
         }
       })
     },
-
     editTodo: function (todo) {
       this.beforeEditCache = todo.title;
       this.editedTodo = todo;
     },
-
-    editDuedate: function (todo) {
-      this.beforeEditCache = todo.duedate;
-      this.editedTodo = todo;
-    },
-
     doneEdit: function (todo) {
       if (!this.editedTodo) {
         return;
@@ -265,18 +241,15 @@ export default {
         });
       }
     },
-
     cancelEdit: function (todo) {
       this.editedTodo = null;
       todo.title = this.beforeEditCache;
     },
-
     removeCompleted: function () {
       filters.completed(this.todos).forEach(t => {
         this.removeTodo(t);
       });
     },
-
     pluralize: function (term, count) {
       if (count > 1)
         return term + 's';
@@ -284,7 +257,6 @@ export default {
         return term;
     }
   },
-
   directives: {
     "todo-focus": function (el, binding) {
       if (binding.value) {
@@ -293,5 +265,4 @@ export default {
     }
   }
 };
-
 </script>
