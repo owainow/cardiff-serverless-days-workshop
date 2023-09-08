@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[todos]
 	[completed] [bit] NOT NULL,
 	[owner_id] [varchar](128) NOT NULL,
 	[position] INT NULL,
-	[duedate] [DATE] NOT NULL
+	[inprogress] [bit] NOT NULL
 ) 
 GO
 ALTER TABLE [dbo].[todos] ADD PRIMARY KEY NONCLUSTERED 
@@ -19,5 +19,5 @@ ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [completed]
 GO
 ALTER TABLE [dbo].[todos] ADD  DEFAULT ('public') FOR [owner_id]
 GO
-ALTER TABLE [dbo].[todos] ADD  DEFAULT ('2024-08-17') FOR [duedate]
+ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [inprogress]
 GO
