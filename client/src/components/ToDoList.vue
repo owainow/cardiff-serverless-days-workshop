@@ -179,9 +179,11 @@ export default {
           this.isLoading = false;
         });
     },
+
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim();
       if (!value) return;
+
       fetch(API, {
         headers: HEADERS,
         method: "POST",
@@ -195,24 +197,7 @@ export default {
         this.todos.push(res.value[0]);
       })
     },
-    addDuedate: function () {
-      var value = this.newDuedate && this.newDuedate.trim();
-      var newDate = new Date(value);
-      var value1 = this.newTodo && this.newTodo.trim();
-      if (!value && !newDate) return;
-      fetch(API, {
-        headers: HEADERS,
-        method: "POST",
-        body: JSON.stringify({ title: value1, order: this.todos.length+1, owner_id: this.userId ?? "public", duedate: newDate })
-      }).then(res => {
-        if (res.ok) {
-          this.newTodo = ''
-          return res.json();
-        }
-      }).then(res => {
-        this.todos.push(res.value[0]);
-      })
-    },
+
     completeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
@@ -220,6 +205,7 @@ export default {
         body: JSON.stringify({ completed: todo.completed, order: todo.order })
       });
     },
+
     removeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
@@ -231,10 +217,12 @@ export default {
         }
       })
     },
+
     editTodo: function (todo) {
       this.beforeEditCache = todo.title;
       this.editedTodo = todo;
     },
+
     doneEdit: function (todo) {
       if (!this.editedTodo) {
         return;
@@ -251,15 +239,18 @@ export default {
         });
       }
     },
+
     cancelEdit: function (todo) {
       this.editedTodo = null;
       todo.title = this.beforeEditCache;
     },
+
     removeCompleted: function () {
       filters.completed(this.todos).forEach(t => {
         this.removeTodo(t);
       });
     },
+
     pluralize: function (term, count) {
       if (count > 1)
         return term + 's';
@@ -267,6 +258,7 @@ export default {
         return term;
     }
   },
+
   directives: {
     "todo-focus": function (el, binding) {
       if (binding.value) {
@@ -275,4 +267,5 @@ export default {
     }
   }
 };
+
 </script>
