@@ -211,7 +211,7 @@ export default {
       });
     },
 
-        inprogressTodo: function (todo) {
+    inprogressTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
         method: "PATCH",
