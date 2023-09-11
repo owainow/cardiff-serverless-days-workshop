@@ -215,7 +215,7 @@ export default {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
         method: "PATCH",
-        body: JSON.stringify({ completed: todo.inprogress, order: todo.order })
+        body: JSON.stringify({ inprogress: todo.inprogress, order: todo.order })
       });
     },
 
