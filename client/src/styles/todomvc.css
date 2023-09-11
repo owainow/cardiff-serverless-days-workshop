@@ -181,7 +181,6 @@ body {
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
-	position: absolute;
     float: right;
 	top: 0;
 	bottom: 0;
