@@ -39,7 +39,7 @@ insert into dbo.todos
 	[completed],
 	[owner_id],
 	[position],
-    [duedate]
+    [inprogress]
 ) 
 values
     ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, 0),
