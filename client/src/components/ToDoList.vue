@@ -11,7 +11,10 @@
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
+            <div class="float">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
+            <input @change="inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.inprogress" />
+            </div>
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
@@ -203,6 +206,14 @@ export default {
         headers: HEADERS,
         method: "PATCH",
         body: JSON.stringify({ completed: todo.completed, order: todo.order })
+      });
+    },
+
+        inprogressTodo: function (todo) {
+      fetch(API + `/id/${todo.id}`, {
+        headers: HEADERS,
+        method: "PATCH",
+        body: JSON.stringify({ completed: todo.inprogress, order: todo.order })
       });
     },
 
