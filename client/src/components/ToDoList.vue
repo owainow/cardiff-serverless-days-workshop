@@ -13,7 +13,8 @@
           <div class="view">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
             <div class="float">
-            <input @change="completeTodo(todo)" class="toggle" type="checkbox" />
+            <input @change="inprogressTodo(todo)" class="toggle2" type="checkbox" />
+            <button class="destroy" @click="removeTodo(todo)"></button>
             </div>
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
