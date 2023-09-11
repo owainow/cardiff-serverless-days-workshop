@@ -12,16 +12,14 @@
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
-            <div class="float">
-            <input @change="inprogressTodo(todo)" class="toggle2" type="checkbox" />
-            <button class="destroy" @click="removeTodo(todo)"></button>
-            </div>
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
+            < div class="float">
+            <input @change="inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.inprogress" />
+            </div>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" />
-
         </li>
       </ul>
     </section>
