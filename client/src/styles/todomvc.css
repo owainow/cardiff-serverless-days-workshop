@@ -184,7 +184,7 @@ body {
     float: right;
 	top: 0;
 	bottom: 0;
-	margin: auto 0;
+	margin: 10px;
 	border: none; /* Mobile Safari */
 	-webkit-appearance: none;
 	appearance: none;
