@@ -14,9 +14,7 @@
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
-            <div class="float">
             <input @change="inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.inprogress" />
-            </div>
           </div>
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
             @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)" />
@@ -40,7 +38,7 @@
         </li>
         <li>
           <a href="#/inprogress" @click="visibility = 'inprogress'"
-            :class="{ selected: visibility == 'inprogress' }">inprogress</a>
+            :class="{ selected: visibility == 'inprogress' }">In Progress</a>
         </li>
       </ul>
       <button class="clear-completed" @click="removeCompleted" v-show="completedTodos.length > 0">
