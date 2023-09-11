@@ -10,11 +10,9 @@
       <ul class="todo-list">        
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
-          <div class="float" id="2">
-            <input @change="inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.inprogress" />
-          </div>
           <div class="view" id="1">
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" />
+            <input @change="inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.inprogress" />
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
