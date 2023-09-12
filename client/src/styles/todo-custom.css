@@ -32,8 +32,7 @@
   position: relative;
 	top: 0;
 	bottom: 0;
-  right: 20px;
-	margin: 0px;
+	margin: 20px;
 	border: none; /* Mobile Safari */
 	-webkit-appearance: none;
 	appearance: none;
