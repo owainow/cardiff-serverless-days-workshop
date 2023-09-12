@@ -11,12 +11,8 @@
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view" id="1">
-           <table>
-            <tr>
-             <td> <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" /> </td>
-             <td> <input @change="inprogressTodo(todo)" class="toggle2" type="checkbox" v-model="todo.inprogress" /> </td>
-            </tr>
-           </table>
+             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" /> 
+             <input @change="inprogressTodo(todo)" class="toggle2" type="checkbox" v-model="todo.inprogress" /> 
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
@@ -65,6 +61,9 @@ var filters = {
   },
   completed: function (todos) {
     return todos.filter(todo => { return todo.completed; });
+  },
+  inprogress: function (todos) {
+  return todos.filter(todo => { return todo.inprogress; });
   }
 };
 
@@ -113,6 +112,9 @@ export default {
     completedTodos: function () { return filters["completed"](this.todos) },
 
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
+
+    inprogressTodos: function () { return filters["inprogress"](this.todos) },
+    
   },
 
   watch: {
