@@ -217,6 +217,7 @@ body {
     float: right;
 	top: 0;
 	bottom: 0;
+    right: 20px;
 	margin: 10px;
 	border: none; /* Mobile Safari */
 	-webkit-appearance: none;
