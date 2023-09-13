@@ -23,6 +23,20 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
+.inprogtoggle{
+  text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+  position:absolute;
+	top: 0;
+	bottom: 0;
+	margin: 20px;
+  right:10%;
+	border: none; /* Mobile Safari */
+	-webkit-appearance: none;
+	appearance: none;
+}
 
 .todo-list li .toggle2 {
 	text-align: center;
@@ -35,7 +49,8 @@
 	margin: 20px;
   right:10%;
 	border: none; /* Mobile Safari */
-  display: block;
+	-webkit-appearance: none;
+	appearance: none;
 }
 
 .todo-list li .toggle2 {
