@@ -28,10 +28,9 @@
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
-  position:absolute;
+  position:relative;
 	top: 0;
 	bottom: 0;
-	margin: 20px;
   right:10%;
    /* Mobile Safari */
    
