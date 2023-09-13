@@ -51,7 +51,7 @@
 
 .todo-list li .inprogtoggle:checked + label  {
 	background-image: url("inprog-timer.png")
-
+}
 
 #inprogcheck {
   display: none;
