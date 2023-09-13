@@ -71,19 +71,6 @@
    
 }
 
-.todo-list li .toggle2 {
-	opacity: 0;
-}
-
-.todo-list li .toggle2  {
-	/*
-		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
-		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
-	*/
-	background-image: url('https://flyclipart.com/thumb2/timer-icon-414020.png');
-	background-repeat: no-repeat;
-	background-position: center left;
-}
 
 .todo-list li label {
 	word-break: break-all;
@@ -98,9 +85,6 @@
 	text-decoration: line-through;
 }
 
-.todo-list li .toggle2:checked  {
-	background-image: url('https://th.bing.com/th/id/OIP.teYmlox3I2xhjGOZQNeUSQHaHa?pid=ImgDet&rs=1');
-}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.toggle-all,
