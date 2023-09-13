@@ -31,8 +31,8 @@ label > input[type="checkbox"] + *::before {
   content: ""\f017"";
   display: inline-block;
   vertical-align: bottom;
-  width: 1rem;
-  height: 1rem;
+  width: 40px;
+  height: 40px;
   border-radius: 10%;
   border-style: solid;
   border-width: 0.1rem;
