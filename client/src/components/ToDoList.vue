@@ -14,7 +14,7 @@
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" /> 
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
-            <input @change="inprogressTodo(todo)" class="toggle2" type="checkbox" v-model="todo.inprogress" /> 
+            <input @change="inprogressTodo(todo)"  type="checkbox" v-model="todo.inprogress" /> 
           </div>
 
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
