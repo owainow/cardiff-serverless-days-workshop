@@ -47,9 +47,6 @@
   color: orange;
 }
 
-.css-checkbox { position: absolute; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0; }#inputPreview { display: flex; gap: 20px; justify-content: center;	}.css-checkbox + label { position: relative; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; height: 42px; color: rgb(0, 0, 0); }.css-checkbox + label::before { content: " "; display: inline-block; vertical-align: middle; margin-right: 3px; width: 40px; height: 40px; background-color: white; border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204); border-radius: 2px; box-shadow: none; }.css-checkbox:checked + label::after { content: " "; background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBmaWxsPSIjZmY5ZDAwIiBkPSJNNDggMEgzMzZDMzYyLjUgMCAzODQgMjEuNDkgMzg0IDQ4VjQ4Ny43QzM4NCA1MDEuMSAzNzMuMSA1MTIgMzU5LjcgNTEyQzM1NC43IDUxMiAzNDkuOCA1MTAuNSAzNDUuNyA1MDcuNkwxOTIgNDAwTDM4LjI4IDUwNy42QzM0LjE5IDUxMC41IDI5LjMyIDUxMiAyNC4zMyA1MTJDMTAuODkgNTEyIDAgNTAxLjEgMCA0ODcuN1Y0OEMwIDIxLjQ5IDIxLjQ5IDAgNDggMHoiLz48L3N2Zz4="); background-repeat: no-repeat; background-size: 29px 29px; background-position: center center; position: absolute; display: flex; justify-content: center; align-items: center; margin-left: 0px; left: 0px; top: 0px; text-align: center; background-color: transparent; font-size: 10px; height: 42px; width: 42px; }
-
-
 
 .todo-list li label {
 	word-break: break-all;
