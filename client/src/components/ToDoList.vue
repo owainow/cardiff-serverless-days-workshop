@@ -14,8 +14,7 @@
             <input @change="completeTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" /> 
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
-            <label> <input id="inprogcheck" @change="inprogressTodo(todo)"  type="checkbox" v-model="todo.inprogress" /> <span> In Progress? </span> </label>
-          		<input name="cssCheckbox" id="demo_opt_1" type="checkbox" class="css-checkbox"><label for="demo_opt_1"> In Progress</label>
+            <label> <input id="inprogcheck" @change="inprogressTodo(todo)"  type="checkbox" v-model="todo.inprogress" /> <span> &#9202 </span> </label>
           </div>
 
           <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)"
