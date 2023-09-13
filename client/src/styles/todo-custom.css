@@ -56,10 +56,6 @@
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-	.toggle-all,
-	.todo-list li .toggle2 {
-		background: none;
-	}
 
 	.todo-list li .toggle2 {
 		height: 40px;
