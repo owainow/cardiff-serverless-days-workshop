@@ -28,7 +28,7 @@
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
-  position:relative;
+  position:absolute;
 	top: 0;
 	bottom: 0;
   right:10%;
@@ -36,25 +36,6 @@
    
 }
 
-
-
-.todo-list li .inprogtoggle + label {
-	/*
-		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
-		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
-	*/
-	background-image: url('timer-48.png');
-	background-repeat: no-repeat;
-	background-position: center left;
-}
-
-.todo-list li .inprogtoggle:checked + label  {
-	background-image: url("inprog-timer.png")
-}
-
-#inprogcheck {
-  display: none;
-}
 
 
 
