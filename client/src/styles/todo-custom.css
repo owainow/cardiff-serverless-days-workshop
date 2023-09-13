@@ -33,25 +33,15 @@
 	bottom: 0;
   right:10%;
    /* Mobile Safari */
-   
+  content:  "\f017";
+}
+
+.todo-list li .inprogtoggle:checked {
+  content:  "\f017";
+  color: orange;
 }
 
 
-
-/*  switch image  */
-label[for="inprogcheck"] {
-  display: inline-block;
-  text-align: center;
-  width: 40px;
-  height: 40px;
-  border: 0px;
-  background: url(timer-48.png);
-  background-repeat: no-repeat;
-}
-#inprogcheck:checked ~ label[for="inprogcheck"] {
-  background: url(inprog-timer.png);
-  background-repeat: no-repeat;
-}
 
 .todo-list li label {
 	word-break: break-all;
