@@ -34,10 +34,11 @@
 	margin: 20px;
   right:10%;
    /* Mobile Safari */
+   
 }
 
 .todo-list li .toggle2 {
-	text-align: center;
+  text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
@@ -46,9 +47,8 @@
 	bottom: 0;
 	margin: 20px;
   right:10%;
-	border: none; /* Mobile Safari */
-	-webkit-appearance: none;
-	appearance: none;
+   /* Mobile Safari */
+   
 }
 
 .todo-list li .toggle2 {
