@@ -23,7 +23,7 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-.inprogtoggle{
+.todo-list li .inprogtoggle{
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -37,7 +37,7 @@
    
 }
 
-.todo-list li .inprogtoggle  {
+.todo-list li .inprogtoggle + label {
 	/*
 		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
 		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
@@ -47,7 +47,7 @@
 	background-position: center left;
 }
 
-.todo-list li .inprogtoggle:checked  {
+.todo-list li .inprogtoggle:checked + label  {
 	background-image: url('https://th.bing.com/th/id/OIP.teYmlox3I2xhjGOZQNeUSQHaHa?pid=ImgDet&rs=1');
 }
 
