@@ -38,7 +38,9 @@
 
 
 
-
+input {
+  display: none
+}
 
 .todo-list li label {
 	word-break: break-all;
