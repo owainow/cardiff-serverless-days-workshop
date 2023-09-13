@@ -29,6 +29,7 @@
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
   position:absolute;
+  float: left;
 	top: 0;
 	bottom: 0;
   right:10%;
