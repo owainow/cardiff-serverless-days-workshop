@@ -53,6 +53,11 @@
 	background-image: url('https://th.bing.com/th/id/OIP.teYmlox3I2xhjGOZQNeUSQHaHa?pid=ImgDet&rs=1');
 }
 
+
+#inprogcheck {
+  display: none;
+}
+
 .todo-list li .toggle2 {
   text-align: center;
 	width: 40px;
