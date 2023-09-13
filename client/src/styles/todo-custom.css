@@ -33,7 +33,7 @@
 	bottom: 0;
 	margin: 20px;
   right:10%;
-  border: none; /* Mobile Safari */
+   /* Mobile Safari */
 }
 
 .todo-list li .toggle2 {
