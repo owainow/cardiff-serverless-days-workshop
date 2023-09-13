@@ -208,6 +208,7 @@ export default {
     },
 
     completeTodo: function (todo) {
+      var definprog = "1";
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
         method: "PATCH",
