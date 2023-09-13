@@ -23,29 +23,34 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-.todo-list li .inprogtoggle {
-  opacity: 0;
-  position: absolute;
+label > input[type="checkbox"] {
+  display: none;
 }
 
+label > input[type="checkbox"] + *::before {
+  content: ""\f017"";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: gray;
+}
 
-.todo-list li .inprogtoggle:after {
+label > input[type="checkbox"]:checked + *::before {
+  content: "\f017";
+  color: white;
   text-align: center;
-	width: 40px;
-	/* auto, since non-WebKit browsers doesn't support input styling */
-	height: auto;
-  position:absolute;
-	top: 0;
-	bottom: 0;
-  right:10%;
-   /* Mobile Safari */
-  content:  "\f017";
+  background: teal;
+  border-color: teal;
+}
+label > input[type="checkbox"]:checked + * {
+  color: teal;
 }
 
-.todo-list li .inprogtoggle:after:checked {
-  content:  "\f017";
-  color: orange;
-}
+
 
 
 
