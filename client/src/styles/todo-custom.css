@@ -88,11 +88,11 @@
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.toggle-all,
-	.todo-list li .toggle2 {
+	.todo-list li .inprogtoggle {
 		background: none;
 	}
 
-	.todo-list li .toggle2 {
+	.todo-list li .inprogtoggle {
 		height: 40px;
 	}
 }
