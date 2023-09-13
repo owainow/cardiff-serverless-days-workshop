@@ -208,11 +208,10 @@ export default {
     },
 
     completeTodo: function (todo) {
-      var definprog = "1";
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
         method: "PATCH",
-        body: JSON.stringify({ completed: todo.completed, inprogress: definprog order: todo.order })
+        body: JSON.stringify({ completed: todo.completed, inprogress: todo.inprogress order: todo.order })
       });
     },
 
