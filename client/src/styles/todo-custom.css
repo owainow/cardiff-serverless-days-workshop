@@ -34,8 +34,12 @@
 	margin: 20px;
   right:10%;
    /* Mobile Safari */
+  background-image: url('https://flyclipart.com/thumb2/timer-icon-414020.png');
+  background-repeat: no-repeat;
+  background-position: center left;
    
 }
+
 
 .todo-list li .toggle2 {
   text-align: center;
