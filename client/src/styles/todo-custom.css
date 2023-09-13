@@ -29,7 +29,7 @@
 }
 
 
-.todo-list li .inprogtoggle:before {
+.todo-list li .inprogtoggle:after {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -42,7 +42,7 @@
   content:  "\f017";
 }
 
-.todo-list li .inprogtoggle:before:checked {
+.todo-list li .inprogtoggle:after:checked {
   content:  "\f017";
   color: orange;
 }
