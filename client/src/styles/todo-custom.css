@@ -23,14 +23,14 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-.todo-list li .inprogtoggle {
+input[type=checkbox] {
   position: relative;
   visibility: hidden;
   cursor: pointer;
 }
 
 
-.todo-list li .inprogtoggle:after {
+input[type=checkbox]:after {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -43,7 +43,7 @@
   content:  "\f017";
 }
 
-.todo-list li .inprogtoggle:checked:after {
+input[type=checkbox]:checked:after {
   content:  "\f017";
   color: orange;
 }
