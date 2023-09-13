@@ -23,34 +23,7 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-
-
-.inprogtoggle {
-  display:none;
-  }
-   
-  .inprogtoggle + label
-  {
-  background-image: url('timer-48.png');
-  height: 16px;
-  width: 16px;
-  display:inline-block;
-  padding: 0 0 0 0px;
-  }
-  .inprogtoggle:checked + label
-  {
-  background-image: url("inprog-timer.png");
-  height: 16px;
-  width: 16px;
-  display:inline-block;
-  padding: 0 0 0 0px;
-  }
-
-
-
-
-
-.todo-list li .toggle2 {
+.todo-list li .inprogtoggle {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -63,6 +36,28 @@
    /* Mobile Safari */
    
 }
+
+
+
+.todo-list li .inprogtoggle + label {
+	/*
+		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
+		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
+	*/
+	background-image: url('timer-48.png');
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+
+.todo-list li .inprogtoggle:checked + label  {
+	background-image: url("inprog-timer.png")
+}
+
+#inprogcheck {
+  display: none;
+}
+
+
 
 
 .todo-list li label {
