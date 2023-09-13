@@ -39,7 +39,7 @@
 
 
 
-.todo-list li .inprogtoggle {
+.todo-list li .inprogtoggle + label {
 	/*
 		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
 		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
@@ -49,7 +49,7 @@
 	background-position: center left;
 }
 
-.todo-list li .inprogtoggle:checked  {
+.todo-list li .inprogtoggle:checked + label  {
 	background-image: url("inprog-timer.png")
 }
 
@@ -58,17 +58,14 @@
 }
 
 .todo-list li .toggle2 {
-	text-align: center;
+  text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;
-	position: absolute;
+  position:absolute;
 	top: 0;
 	bottom: 0;
-	margin: auto 0;
-	border: none; /* Mobile Safari */
-	-webkit-appearance: none;
-	appearance: none;
+	margin: 20px;
   right:10%;
    /* Mobile Safari */
    
