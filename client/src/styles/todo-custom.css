@@ -23,6 +23,13 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
+input[type=checkbox] {
+  position: relative;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+
 .todo-list li .inprogtoggle {
   text-align: center;
 	width: 40px;
