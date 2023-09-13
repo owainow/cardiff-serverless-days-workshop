@@ -23,34 +23,31 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-label > input[type="checkbox"] {
-  display: none;
+.inprogtoggle {
+  opacity: 0;
+  position: absolute;
 }
 
-label > input[type="checkbox"] + *::before {
-  content: ""\f017"";
-  display: inline-block;
-  vertical-align: bottom;
-  width: 40px;
-  height: 40px;
-  border-radius: 10%;
-  border-style: solid;
-  border-width: 0.1rem;
-  border-color: gray;
-}
 
-label > input[type="checkbox"]:checked + *::before {
-  content: "\f017";
-  color: white;
+.todo-list li .inprogtoggle:after {
   text-align: center;
-  background: teal;
-  border-color: teal;
-}
-label > input[type="checkbox"]:checked + * {
-  color: teal;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+  position:absolute;
+	top: 0;
+	bottom: 0;
+  right:10%;
+   /* Mobile Safari */
+  content:  "\f017";
 }
 
+.todo-list li .inprogtoggle:after:checked {
+  content:  "\f017";
+  color: orange;
+}
 
+.css-checkbox { position: absolute; overflow: hidden; clip: rect(0 0 0 0); height: 1px; width: 1px; margin: -1px; padding: 0; border: 0; }#inputPreview { display: flex; gap: 20px; justify-content: center;	}.css-checkbox + label { position: relative; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; height: 42px; color: rgb(0, 0, 0); }.css-checkbox + label::before { content: " "; display: inline-block; vertical-align: middle; margin-right: 3px; width: 40px; height: 40px; background-color: white; border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204); border-radius: 2px; box-shadow: none; }.css-checkbox:checked + label::after { content: " "; background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBmaWxsPSIjZmY5ZDAwIiBkPSJNNDggMEgzMzZDMzYyLjUgMCAzODQgMjEuNDkgMzg0IDQ4VjQ4Ny43QzM4NCA1MDEuMSAzNzMuMSA1MTIgMzU5LjcgNTEyQzM1NC43IDUxMiAzNDkuOCA1MTAuNSAzNDUuNyA1MDcuNkwxOTIgNDAwTDM4LjI4IDUwNy42QzM0LjE5IDUxMC41IDI5LjMyIDUxMiAyNC4zMyA1MTJDMTAuODkgNTEyIDAgNTAxLjEgMCA0ODcuN1Y0OEMwIDIxLjQ5IDIxLjQ5IDAgNDggMHoiLz48L3N2Zz4="); background-repeat: no-repeat; background-size: 29px 29px; background-position: center center; position: absolute; display: flex; justify-content: center; align-items: center; margin-left: 0px; left: 0px; top: 0px; text-align: center; background-color: transparent; font-size: 10px; height: 42px; width: 42px; }
 
 
 
