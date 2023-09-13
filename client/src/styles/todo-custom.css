@@ -23,7 +23,7 @@
   border-left-color: rgba(175, 47, 47, 0.15);
 }
 
-.todo-list li .inprogtoggle{
+.todo-list li .inprogtoggle {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -34,7 +34,12 @@
 	margin: 20px;
   right:10%;
    /* Mobile Safari */
+   appearance: none;
    
+}
+
+.todo-list li .inprogtoggle {
+	opacity: 0;
 }
 
 .todo-list li .inprogtoggle + label {
@@ -77,6 +82,19 @@
 	background-image: url('https://flyclipart.com/thumb2/timer-icon-414020.png');
 	background-repeat: no-repeat;
 	background-position: center left;
+}
+
+.todo-list li label {
+	word-break: break-all;
+	padding: 15px 15px 15px 60px;
+	display: block;
+	line-height: 1.2;
+	transition: color 0.4s;
+}
+
+.todo-list li.completed label {
+	color: #d9d9d9;
+	text-decoration: line-through;
 }
 
 .todo-list li .toggle2:checked  {
