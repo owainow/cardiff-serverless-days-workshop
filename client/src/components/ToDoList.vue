@@ -36,7 +36,11 @@
         </li>
         <li>
           <a href="#/completed" @click="visibility = 'completed'"
-            :class="{ selected: visibility == 'completed' }">Completed</a>
+          :class="{ selected: visibility == 'completed' }">Completed</a>
+        </li>
+        <li>
+          <a href="#/completed" @click="visibility = 'inprogress'"
+            :class="{ selected: visibility == 'inprogress' }">In Progress</a>
         </li>
       </ul>
       <button class="clear-completed" @click="removeCompleted" v-show="completedTodos.length > 0">
