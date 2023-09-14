@@ -288,6 +288,7 @@ So that we can filter our workitems by what is in progress we also need to add t
 Add add the filter element to our webapp:
 
 ```vue
+...
         </li>
         <li>
           <a href="#/completed" @click="visibility = 'inprogress'"
@@ -315,7 +316,8 @@ Finally we then need to add the inprogressTodo function so that we can make call
       });
     },
 
-    ```
+```
+
 If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
 
 We can then test our new application feature. Using static web apps we have created our development enviroment which can be accessed by clicking on the "Enviroments" tab in your static web app and clicking browse on the development enviroment. We could also split traffic between enviroments if we wanted too.
