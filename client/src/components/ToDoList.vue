@@ -117,8 +117,6 @@ export default {
 
     inprogressTodos: function () { return filters["inprogress"](this.todos) },
 
-    isDisabled() {}
-    
   },
 
   watch: {
