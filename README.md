@@ -245,14 +245,28 @@ values
 
 We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file (All of these include the lines above for positional reference):
 
+First we will need to add our new inprogress feature to our class:
+
+
+```vue
+...
+<ul class="todo-list">        
+        <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, ...
+
 ```
+Then we will need to add our inprogress checkbox to the main part of our application. 
+
+```vue
+...
             <button class="destroy" @click="removeTodo(todo)"></button>
-            <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" :disabled="todo.completed.checked"  /> 
+            <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress"  /> 
             <label class="inprogicon"> &#9202 </label>
 ```
 
+So that we can filter our workitems by what is in progress we also need to add the following functions:
 
-```
+```vue
+...
   completed: function (todos) {
     return todos.filter(todo => { return todo.completed; });
   },
@@ -263,14 +277,28 @@ We now need to update our front end. To do this we will go into our Client folde
 ```
 
 
-```
+```vue
+...
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
 
     inprogressTodos: function () { return filters["inprogress"](this.todos) },
 
 ```
 
+Add add the filter element to our webapp:
+
+```vue
+        </li>
+        <li>
+          <a href="#/completed" @click="visibility = 'inprogress'"
+            :class="{ selected: visibility == 'inprogress' }">In Progress</a>
+        </li>
 ```
+
+Finally we then need to add the inprogressTodo function so that we can make calls to the API:
+
+```vue
+...
     completeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
         headers: HEADERS,
