@@ -75,7 +75,6 @@ export default {
 
   data() {
     return {
-      disabled: false,
       todos: [],
       newTodo: "",
       editedTodo: null,
