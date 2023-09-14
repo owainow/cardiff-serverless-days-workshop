@@ -245,14 +245,13 @@ values
 
 We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file (All of these include the lines above for positional reference):
 
-```vue
 ```
             <button class="destroy" @click="removeTodo(todo)"></button>
             <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" :disabled="todo.completed.checked"  /> 
             <label class="inprogicon"> &#9202 </label>
 ```
 
-```vue
+
 ```
   completed: function (todos) {
     return todos.filter(todo => { return todo.completed; });
@@ -263,7 +262,7 @@ We now need to update our front end. To do this we will go into our Client folde
 
 ```
 
-```vue
+
 ```
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
 
@@ -271,7 +270,6 @@ We now need to update our front end. To do this we will go into our Client folde
 
 ```
 
-```vue
 ```
     completeTodo: function (todo) {
       fetch(API + `/id/${todo.id}`, {
