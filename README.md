@@ -18,6 +18,8 @@ it uses the following features
 
 ## Pre-Requisites 
 
+- Visual Studio Code or Prefered IDE
+
 - An Azure Subscription with Contributor Privileges
 
 - A GitHub Account
@@ -144,16 +146,174 @@ If you are following the tutorial names this will be cardiffserverless & C@rdiff
 
 The first time we trigger this pipeline we will use a manual trigger. To do this we will head to the Actions section at the top of the page. Then we will click on our Azure Static Web Apps workflow which has been created already and then click "Run Workflow". We can monitor the progress of the workflow by clicking into the running workflow and viewing the steps. 
 
-## 6. View the Application
+## 6. Configure the Static Web App Database Connection
+
+Once the deployment has completed, navigate to the Static Web App resource in the Azure Portal and click on the [Database connection](https://learn.microsoft.com/azure/static-web-apps/database-azure-sql?tabs=bash&pivots=static-web-apps-rest) item under *Settings*. Click on *Link existing database* to connect to the Azure SQL server and the TodoDB that was created by the deployment.
+
+You can use the sample application user that is created during the [database deployment phase](./database/TodoDB/Script.PostDeployment.sql):
+
+- User: `todo_dab_user`
+- Password: `rANd0m_PAzzw0rd!`
+
+## 7. View the Application
 
 Once the workflow has completed we can head to our Azure Portal and view the deployment. Type "Static Web Apps" in the search bar and select the static web app. You should see a SWA called "cardiff-serverless-days-webapp". Once you click through you should be able to see the public URL. Click on the URL and add a new todo to the list. We can see we now have a fully functioning static web app. Below the app is also login capabilites using GitHub as the IDP allowing you to create a persisted todo list. 
 
-## 7. New application feature
+## 8. New application feature
 
-Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date".
+Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let's now update the application to add a button and corresponding collumn to our database to show items that are in progress.
 
-To start with we will need to create a new branch for our feature change. To do this we can use the following command. 
+To start with we will need to create a new branch for our feature change. To do this we can use the following command: 
 
 ```shell 
-git checkout -b duedate
+git checkout -b inprogress
 ```
+
+We can then publish the branch in our remote repository with the following command: 
+
+```shell 
+git push -u origin inprogress
+```
+
+We now need to make our first branch specific code change. We need to change our GitHub Action to be triggered by the new branch. Within our GitHub Action manifest we need to add the following to our triggers:
+
+```yaml
+on:
+  workflow_dispatch:    
+  push:
+    branches:
+      - main
+      - inprogress
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+      - inprogress
+```
+
+We also need to add an additional parameter to our workflow file. This is to specify the production branch that we want to use. This means that when using a branch to build from other then the specified branch we will create "Preview" or a test enviroment. 
+
+```yaml
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          production_branch: "main"
+```
+Once we have made this chance to our local files we can then save it, commit and push it to our branch. 
+
+As we have a new enviroment we also need to go back to our database connection and add the connection for our development enviroment.
+
+We now need to make some changes to our database config and add an additional collumn. We can do this by editing our dbo.todos.sql file:
+
+```sql
+    ...
+	[position] INT NULL,
+	[inprogress] [bit] NOT NULL
+```
+
+We also need to add the following to set a default for the new collumn:
+
+```sql
+...
+ALTER TABLE [dbo].[todos] ADD  DEFAULT ('public') FOR [owner_id]
+GO
+ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [inprogress]
+GO
+```
+
+We also will then need to populate our database once it is deployed. We can do this by adding the following to the existing sql in the Script.PostDeployment.sql
+
+```sql
+insert into dbo.todos 
+(
+    [id],
+    [title],
+	[completed],
+	[owner_id],
+	[position],
+    [inprogress]
+) 
+values
+    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, 0),
+    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2, 1),
+    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', 4, 0),
+    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3, 1),
+    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5, 0)
+;
+```
+
+We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file (All of these include the lines above for positional reference):
+
+First we will need to add our new inprogress feature to our class:
+
+
+```vue
+...
+<ul class="todo-list">        
+        <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, ...
+
+```
+Then we will need to add our inprogress checkbox to the main part of our application. 
+
+```vue
+...
+            <button class="destroy" @click="removeTodo(todo)"></button>
+            <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress"  /> 
+            <label class="inprogicon"> &#9202 </label>
+```
+
+So that we can filter our workitems by what is in progress we also need to add the following functions:
+
+```vue
+...
+  completed: function (todos) {
+    return todos.filter(todo => { return todo.completed; });
+  },
+  inprogress: function (todos) {
+  return todos.filter(todo => { return todo.inprogress; });
+  }
+
+```
+
+
+```vue
+...
+    filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
+
+    inprogressTodos: function () { return filters["inprogress"](this.todos) },
+
+```
+
+Add add the filter element to our webapp:
+
+```vue
+        </li>
+        <li>
+          <a href="#/completed" @click="visibility = 'inprogress'"
+            :class="{ selected: visibility == 'inprogress' }">In Progress</a>
+        </li>
+```
+
+Finally we then need to add the inprogressTodo function so that we can make calls to the API:
+
+```vue
+...
+    completeTodo: function (todo) {
+      fetch(API + `/id/${todo.id}`, {
+        headers: HEADERS,
+        method: "PATCH",
+        body: JSON.stringify({ completed: todo.completed, order: todo.order })
+      });
+    },
+
+    inprogressTodo: function (todo) {
+      fetch(API + `/id/${todo.id}`, {
+        headers: HEADERS,
+        method: "PATCH",
+        body: JSON.stringify({ inprogress: todo.inprogress, order: todo.order })
+      });
+    },
+
+    ```
+    If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
