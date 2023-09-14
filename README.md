@@ -316,4 +316,13 @@ Finally we then need to add the inprogressTodo function so that we can make call
     },
 
     ```
-    If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
+If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
+
+We can then test our new application feature. Using static web apps we have created our development enviroment which can be accessed by clicking on the "Enviroments" tab in your static web app and clicking browse on the development enviroment. We could also split traffic between enviroments if we wanted too.
+
+
+We can now try filter and add to check our new feature is working as expected. 
+
+## 8. Conclusion 
+
+Once on the app we can test our change and see how we are able to get and filter our todo's using the API built from our database! 
