@@ -51,7 +51,7 @@
   opacity: 0;
    
 }
-.todo-list li.inprogress .inprogicon  {
+.todo-list li.inprogress input.inprogtoggle  {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
