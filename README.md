@@ -288,3 +288,4 @@ We now need to update our front end. To do this we will go into our Client folde
     },
 
     ```
+    If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
