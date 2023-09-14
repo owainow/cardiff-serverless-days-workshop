@@ -37,7 +37,7 @@
    
 }
 
-.todo-list li .inprogicon {
+.todo-list li.inprogtoggle .inprogicon {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
