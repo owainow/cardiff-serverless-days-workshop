@@ -161,18 +161,18 @@ Once the workflow has completed we can head to our Azure Portal and view the dep
 
 ## 8. New application feature
 
-Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let us now add an additional collumn to the application such as "Due Date".
+Let's now see how we can utilise the Data API builder to minimise the code required to make a change to this application. Let's now update the application to add a button and corresponding collumn to our database to show items that are in progress.
 
 To start with we will need to create a new branch for our feature change. To do this we can use the following command: 
 
 ```shell 
-git checkout -b duedate
+git checkout -b inprogress
 ```
 
 We can then publish the branch in our remote repository with the following command: 
 
 ```shell 
-git push -u origin duedate
+git push -u origin inprogress
 ```
 
 We now need to make our first branch specific code change. We need to change our GitHub Action to be triggered by the new branch. Within our GitHub Action manifest we need to add the following to our triggers:
@@ -183,12 +183,12 @@ on:
   push:
     branches:
       - main
-      - duedate
+      - inprogress
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-      - duedate
+      - inprogress
 ```
 
 We also need to add an additional parameter to our workflow file. This is to specify the production branch that we want to use. This means that when using a branch to build from other then the specified branch we will create "Preview" or a test enviroment. 
@@ -209,7 +209,7 @@ We now need to make some changes to our database config and add an additional co
 ```sql
     ...
 	[position] INT NULL,
-	[duedate] [DATE] NOT NULL
+	[inprogress] [bit] NOT NULL
 ```
 
 We also need to add the following to set a default for the new collumn:
@@ -218,7 +218,7 @@ We also need to add the following to set a default for the new collumn:
 ...
 ALTER TABLE [dbo].[todos] ADD  DEFAULT ('public') FOR [owner_id]
 GO
-ALTER TABLE [dbo].[todos] ADD  DEFAULT ('2024-08-17') FOR [duedate]
+ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [inprogress]
 GO
 ```
 
@@ -232,21 +232,61 @@ insert into dbo.todos
 	[completed],
 	[owner_id],
 	[position],
-    [duedate]
+    [inprogress]
 ) 
 values
-    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, '17082023'),
-    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2, '23042024'),
-    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', '25122023'),
-    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3, '20112023'),
-    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5, '25122023')
+    ('00000000-0000-0000-0000-000000000001', N'Hello world', 0, 'public', 1, 0),
+    ('00000000-0000-0000-0000-000000000002', N'This is done', 1, 'public', 2, 1),
+    ('00000000-0000-0000-0000-000000000003', N'And this is not done (yet!)', 0, 'public', 4, 0),
+    ('00000000-0000-0000-0000-000000000004', N'This is a ☆☆☆☆☆ tool!', 0, 'public', 3, 1),
+    ('00000000-0000-0000-0000-000000000005', N'Add support for sorting', 1, 'public', 5, 0)
 ;
 ```
 
-We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file:
+We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file (All of these include the lines above for positional reference):
 
 ```vue
-...
-            <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-            <label @dblclick="editTodo(todo)">{{ todo.duedate }}</label>
 ```
+            <button class="destroy" @click="removeTodo(todo)"></button>
+            <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" :disabled="todo.completed.checked"  /> 
+            <label class="inprogicon"> &#9202 </label>
+```
+
+```vue
+```
+  completed: function (todos) {
+    return todos.filter(todo => { return todo.completed; });
+  },
+  inprogress: function (todos) {
+  return todos.filter(todo => { return todo.inprogress; });
+  }
+
+```
+
+```vue
+```
+    filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
+
+    inprogressTodos: function () { return filters["inprogress"](this.todos) },
+
+```
+
+```vue
+```
+    completeTodo: function (todo) {
+      fetch(API + `/id/${todo.id}`, {
+        headers: HEADERS,
+        method: "PATCH",
+        body: JSON.stringify({ completed: todo.completed, order: todo.order })
+      });
+    },
+
+    inprogressTodo: function (todo) {
+      fetch(API + `/id/${todo.id}`, {
+        headers: HEADERS,
+        method: "PATCH",
+        body: JSON.stringify({ inprogress: todo.inprogress, order: todo.order })
+      });
+    },
+
+    ```
