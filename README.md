@@ -9,7 +9,7 @@ The Todo application allows to
 - Mark a todo as completed
 - Drag and drop to reorder todos
 
-it uses the following features
+It uses the following features:
 
 - Backend REST API via Data API builder 
 - Authentication via Easy Auth configured to use GitHub
