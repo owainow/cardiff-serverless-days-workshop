@@ -192,9 +192,6 @@ export default {
         });
     },
 
-    checkInProg: function () {
-
-    }
 
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim();
