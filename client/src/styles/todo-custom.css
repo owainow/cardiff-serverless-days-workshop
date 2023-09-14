@@ -51,7 +51,22 @@
   opacity: 0;
    
 }
-.todo-list li.inprogress input.inprogtoggle  {
+
+.todo-list li input.inprogtoggle.checked .inprogicon {
+	text-align: center;
+	  width: 40px;
+	  /* auto, since non-WebKit browsers doesn't support input styling */
+	  height: auto;
+	position:absolute;
+	float: left;
+	  top: 0;
+	  bottom: 0;
+	right:15%;
+	 /* Mobile Safari */
+	opacity: 100;
+	 
+  }
+.todo-list li.inprogress .inprogtoggle  {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -61,6 +76,7 @@
 	top: 0;
 	bottom: 0;
   right:15%;
+  opacity: 0;
    /* Mobile Safari */
    
 }
