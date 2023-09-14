@@ -322,8 +322,9 @@ If you would instead like to copy the full final with the code changes already m
 
 We can then test our new application feature. Using static web apps we have created our development enviroment which can be accessed by clicking on the "Enviroments" tab in your static web app and clicking browse on the development enviroment. We could also split traffic between enviroments if we wanted too.
 
+<img width="562" alt="app" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/a4d6d8f7-1f28-48fd-960e-8be8a931db0c">
 
-We can now try filter and add to check our new feature is working as expected. 
+We can now try filter and add a new todo to check our new feature is working as expected. 
 
 ## 8. Conclusion 
 
