@@ -11,10 +11,10 @@
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
-            <input @change="completeTodo(todo), checkClicked($event, todo)" class="toggle" ref="completechk" type="checkbox" v-model="todo.completed" /> 
+            <input @change="completeTodo(todo)" class="toggle"  name="completechk" type="checkbox" v-model="todo.completed" /> 
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
-            <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" /> 
+            <input id="inprogcheck" @change="inprogressTodo(todo)" :disabled="completechk.checked"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" /> 
             <label class="inprogicon"> &#9202 </label>
           </div>
 
@@ -75,6 +75,7 @@ export default {
 
   data() {
     return {
+      disabled: false,
       todos: [],
       newTodo: "",
       editedTodo: null,
@@ -115,6 +116,8 @@ export default {
     filteredTodos: function () { return (filters[this.visibility](this.todos)).sort(t => t.order); },
 
     inprogressTodos: function () { return filters["inprogress"](this.todos) },
+
+    isDisabled() {}
     
   },
 
@@ -130,13 +133,6 @@ export default {
   },
 
   methods: {
-  
-  checkClicked(evt, todo) {
-    var true = "1";
-      if (this.$refs.completechk.checked) {
-        evt.dataTransfer.setData('inprogress', true)
-      } 
-    },
     
     dragStart: function(evt, todo) {      
       evt.dataTransfer.dropEffect = 'move'
