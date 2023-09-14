@@ -11,7 +11,7 @@
         <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ inprogress: todo.inprogress, completed: todo.completed, editing: todo == editedTodo }" 
           draggable="true" @dragstart="dragStart($event, todo)" @drop="dragDrop($event, todo)" @dragenter="dragEnter($event)" @dragleave="dragLeave($event)" @dragover.prevent>
           <div class="view">
-            <input @change="completeTodo(todo), inprogressTodo(todo)" class="toggle" type="checkbox" v-model="todo.completed" /> 
+            <input @change="completeTodo(todo), checkClicked($event, todo)" class="toggle" ref="completechk" type="checkbox" v-model="todo.completed" /> 
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
             <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress" /> 
@@ -130,6 +130,13 @@ export default {
   },
 
   methods: {
+  
+  checkClicked(evt, todo) {
+    var true = "1";
+      if (this.$refs.completechk.checked) {
+        evt.dataTransfer.setData('inprogress', true)
+      } 
+    },
     
     dragStart: function(evt, todo) {      
       evt.dataTransfer.dropEffect = 'move'
@@ -188,6 +195,10 @@ export default {
           this.isLoading = false;
         });
     },
+
+    checkInProg: function () {
+
+    }
 
     addTodo: function () {
       var value = this.newTodo && this.newTodo.trim();
