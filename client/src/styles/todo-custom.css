@@ -37,7 +37,7 @@
    
 }
 
-.todo-list li .inprogicon {
+.todo-list li .inprogtoggle {
   text-align: center;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
@@ -48,37 +48,9 @@
 	bottom: 0;
   right:15%;
    /* Mobile Safari */
-  opacity: 0;
    
 }
 
-.todo-list li input.inprogtoggle.checked .inprogicon {
-	text-align: center;
-	  width: 40px;
-	  /* auto, since non-WebKit browsers doesn't support input styling */
-	  height: auto;
-	position:absolute;
-	float: left;
-	  top: 0;
-	  bottom: 0;
-	right:15%;
-	 /* Mobile Safari */
-	 
-  }
-.todo-list li.inprogress .inprogtoggle  {
-  text-align: center;
-	width: 40px;
-	/* auto, since non-WebKit browsers doesn't support input styling */
-	height: auto;
-  position:absolute;
-  float: left;
-	top: 0;
-	bottom: 0;
-  right:15%;
-  opacity: 0;
-   /* Mobile Safari */
-   
-}
 
 .todo-list li label {
 	word-break: break-all;
