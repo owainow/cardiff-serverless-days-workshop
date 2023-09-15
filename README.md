@@ -326,6 +326,8 @@ We can then test our new application feature. Using static web apps we have crea
 
 We can now try filter and add a new todo to check our new feature is working as expected. 
 
+Once we verify our feature is working as expected we can create a pull request to merge our feature branch into our main branch. We should then see our features in our production enviroment. 
+
 ## 8. Conclusion 
 
 Once on the app we can test our change and see how we are able to get and filter our todo's using the API built from our database! 
