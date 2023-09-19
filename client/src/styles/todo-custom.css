@@ -1,93 +1,90 @@
 .todoapp h2 {
-  position: absolute;
-  top: -40px;
-  width: 100%;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  color: rgba(175, 47, 47, 0.15);
-  padding-bottom: 20px;
-}
-
-.bottom {
-  color: #dfdfdf
-}
-
-.loader {
-  display: inline;
-}
-
-.drag {
-  border-left-width: thick;
-  border-left-style: solid;
-  border-left-color: rgba(175, 47, 47, 0.15);
-}
-
-.todo-list li .inprogtoggle {
-  text-align: center;
-	width: 40px;
-	/* auto, since non-WebKit browsers doesn't support input styling */
-	height: auto;
-  position:absolute;
-  float: left;
-	top: 0;
-	bottom: 0;
-  right:10%;
-   /* Mobile Safari */
-   
-}
-
-.todo-list li .inprogicon {
-  text-align: center;
-	width: 40px;
-	/* auto, since non-WebKit browsers doesn't support input styling */
-	height: auto;
-  position:absolute;
-  float: left;
-	top: 0;
-	bottom: 0;
-  right:15%;
-   /* Mobile Safari */
-   
-}
-
-
-.todo-list li label {
-	word-break: break-all;
-	padding: 15px 15px 15px 60px;
-	display: block;
-	line-height: 1.2;
-	transition: color 0.4s;
-}
-
-.todo-list li.completed label {
-	color: #d9d9d9;
-	text-decoration: line-through;
-}
-
-
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	.toggle-all,
-	.todo-list li .inprogtoggle {
-		background: none;
-	}
-
-	.todo-list li .inprogtoggle {
-		height: 40px;
-	}
-}
-
-@media (max-width: 430px) {
-	.footer {
-		height: 50px;
-	}
-
-	.filters {
-		bottom: 10px;
-	}
-}
-
-
-
-
+	position: absolute;
+	top: -40px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	color: rgba(175, 47, 47, 0.15);
+	padding-bottom: 20px;
+  }
+  
+  .bottom {
+	color: #dfdfdf
+  }
+  
+  .loader {
+	display: inline;
+  }
+  
+  .drag {
+	border-left-width: thick;
+	border-left-style: solid;
+	border-left-color: rgba(175, 47, 47, 0.15);
+  }
+  
+  .todo-list li .inprogtoggle {
+	text-align: center;
+	  width: 40px;
+	  /* auto, since non-WebKit browsers doesn't support input styling */
+	  height: auto;
+	position:absolute;
+	float: left;
+	  top: 0;
+	  bottom: 0;
+	right:10%;
+	 /* Mobile Safari */
+	 
+  }
+  
+  .todo-list li .inprogicon {
+	text-align: center;
+	  width: 40px;
+	  /* auto, since non-WebKit browsers doesn't support input styling */
+	  height: auto;
+	position:absolute;
+	float: left;
+	  top: 0;
+	  bottom: 0;
+	right:15%;
+	 /* Mobile Safari */
+	 
+  }
+  
+  
+  .todo-list li label {
+	  word-break: break-all;
+	  padding: 15px 15px 15px 60px;
+	  display: block;
+	  line-height: 1.2;
+	  transition: color 0.4s;
+  }
+  
+  .todo-list li.completed label {
+	  color: #d9d9d9;
+	  text-decoration: line-through;
+  }
+  
+  
+  
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+	  .toggle-all,
+	  .todo-list li .inprogtoggle {
+		  background: none;
+	  }
+  
+	  .todo-list li .inprogtoggle {
+		  height: 40px;
+	  }
+  }
+  
+  @media (max-width: 430px) {
+	  .footer {
+		  height: 50px;
+	  }
+  
+	  .filters {
+		  bottom: 10px;
+	  }
+  }
+  
