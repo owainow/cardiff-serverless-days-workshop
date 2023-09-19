@@ -75,7 +75,7 @@ Take note of that token as we will need it later for our GitHub Actions.
 We can create a new Azure SQL server using the following command:
 
 ```shell
-az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password C@rdiffS3rv3rless2023
+az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password CardiffS3rv3rless2023
 ```
 We can then set our signed in user as the AD Admin. To do this we will require our user object id:
 
@@ -136,9 +136,11 @@ And then we need to retrive our SQL Connection string. We can do that with the f
 az sql db show-connection-string -s cardiff-serverless-days-db -n TodoDB -c ado.net
 ```
 
-You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier at the point we created the database
+You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier at the point we created the database.
 
-If you are following the tutorial names this will be cardiffserverless & C@rdiffS3rv3rless2023.
+Be sure to remove the quotation marks from the connection string before adding to your GitHub Secret.
+
+If you are following the tutorial names this will be cardiffserverless & CardiffS3rv3rless2023.
 
 `AZURE_SQL_CONNECTION_STRING : Custom SQL connection string value`
 
