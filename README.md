@@ -40,6 +40,8 @@ To start with for this workshop you will need to fork this repository. This can 
 
 Once this repository is forked you will have your own version of the repository. This will allow us to push our own code changes. 
 
+We can now clone our repository onto our local machine for changes we'll make later. Ensure you are logged in to Git in your IDE and open the terminal to run "Git clone <Your fork>".
+
 
 ## 2. Create the static web app resource.
 
