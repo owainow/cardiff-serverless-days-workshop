@@ -74,10 +74,10 @@ Take note of that token as we will need it later for our GitHub Actions.
 
 ## 3. Create and configure the Azure SQL Database
 
-We can create a new Azure SQL server using the following command:
+We can create a new Azure SQL server using the following command (make sure to change `<rng>` to avoid naming collisions):
 
 ```shell
-az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password CardiffS3rv3rless2023
+az sql server create -n cardiff-serverless-days-db<rng> -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password CardiffS3rv3rless2023
 ```
 We can then set our signed in user as the AD Admin. To do this we will require our user object id:
 
@@ -89,16 +89,16 @@ az ad signed-in-user show --query id -o tsv
 Then create the AD Admin for our server.
 
 ```shell
-az sql server ad-admin create --display-name <yourfirstname> --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
+az sql server ad-admin create --display-name <yourfirstname> --object-id <id> --server cardiff-serverless-days-db<rng> -g cardiff-serverless-days
 ```
 
 We now need to ensure that Azure Services can connect to the created Azure SQL server:
 
 ```shell
-az sql server firewall-rule create -n AllowAllWindowsAzureIps -g cardiff-serverless-days --server cardiff-serverless-days-db --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+az sql server firewall-rule create -n AllowAllWindowsAzureIps -g cardiff-serverless-days --server cardiff-serverless-days-db<rng> --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
 ```
 
-This is an open firewall rule and certainly not advisable outside of the context of this workshop. To learn more  about how to configure an Azure SQL firewall click here: [Connections from inside Azure](https://learn.microsoft.com/azure/azure-sql/database/firewall-configure?view=azuresql#connections-from-inside-azure)
+This is an open firewall rule and certainly not advisable outside of the context of this workshop. To learn more about how to configure an Azure SQL firewall click here: [Connections from inside Azure](https://learn.microsoft.com/azure/azure-sql/database/firewall-configure?view=azuresql#connections-from-inside-azure)
 
 
 
@@ -135,7 +135,7 @@ We finally need to create two secrets from our earlier commands. The first is th
 And then we need to retrive our SQL Connection string. We can do that with the following (don't worry if the TodoDB database doesn't exist yet, it will be created later automatically):
 
 ```shell 
-az sql db show-connection-string -s cardiff-serverless-days-db -n TodoDB -c ado.net
+az sql db show-connection-string -s cardiff-serverless-days-db<rng> -n TodoDB -c ado.net
 ```
 
 You will then need to replace the `<username>` and `<password>` in the connection string with those for a user that can perform DDL (create/alter/drop) operations on the database. We will use the admin details that we created earlier at the point we created the database.
@@ -196,7 +196,7 @@ on:
       - main
       - inprogress
 ```
-
+<!-- not required afaik
 We also need to add an additional parameter to our workflow file. This is to specify the production branch that we want to use. This means that when using a branch to build from other then the specified branch we will create "Preview" or a test enviroment. 
 
 ```yaml
@@ -206,11 +206,12 @@ We also need to add an additional parameter to our workflow file. This is to spe
           action: "upload"
           production_branch: "main"
 ```
+-->
 Once we have made this chance to our local files we can then save it, commit and push it to our branch. 
 
-As we have a new enviroment we also need to go back to our database connection and add the connection for our development enviroment.
+As we have a new enviroment we also need to go back to our database connection tab in our static web app and add the connection for our development enviroment.
 
-We now need to make some changes to our database config and add an additional collumn. We can do this by editing our dbo.todos.sql file:
+We now need to make some changes to our database config and add an additional column. We can do this by editing our `database/TodoDB/dbo.todos.sql` file:
 
 ```sql
     ...
@@ -228,7 +229,7 @@ ALTER TABLE [dbo].[todos] ADD  DEFAULT ((0)) FOR [inprogress]
 GO
 ```
 
-We also will then need to populate our database once it is deployed. We can do this by adding the following to the existing sql in the Script.PostDeployment.sql
+We also will then need to populate our database once it is deployed. We can do this by updating the following INSERT statement in the `database/TodoDB/Script.PostDeployment.sql` file:
 
 ```sql
 insert into dbo.todos 
@@ -249,7 +250,7 @@ values
 ;
 ```
 
-We now need to update our front end. To do this we will go into our Client folder, open SRC and then components. We will make the following change to the ToDoList.vue file (All of these include the lines above for positional reference):
+We now need to update our front end. To do this we will go to `client/src/components/ToDoList.vue`. Note the changes include the lines above in the source files for positional reference.
 
 First we will need to add our new inprogress feature to our class:
 
@@ -265,6 +266,7 @@ Then we will need to add our inprogress checkbox to the main part of our applica
 ```vue
 ...
             <button class="destroy" @click="removeTodo(todo)"></button>
+	</div>
             <input id="inprogcheck" @change="inprogressTodo(todo)"  class="inprogtoggle" type="checkbox" v-model="todo.inprogress"  /> 
             <label class="inprogicon"> &#9202 </label>
 ```
@@ -297,7 +299,7 @@ Add add the filter element to our webapp:
 ...
         </li>
         <li>
-          <a href="#/completed" @click="visibility = 'inprogress'"
+          <a href="#/inprogress" @click="visibility = 'inprogress'"
             :class="{ selected: visibility == 'inprogress' }">In Progress</a>
         </li>
 ```
@@ -326,11 +328,13 @@ Finally we then need to add the inprogressTodo function so that we can make call
 
 If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
 
+Commit and push the edited code.
+
 We can then test our new application feature. Using static web apps we have created our development enviroment which can be accessed by clicking on the "Enviroments" tab in your static web app and clicking browse on the development enviroment. We could also split traffic between enviroments if we wanted too.
 
 <img width="562" alt="app" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/a4d6d8f7-1f28-48fd-960e-8be8a931db0c">
 
-We can now try filter and add a new todo to check our new feature is working as expected. 
+We can now test the in-progress buttons and filter and add a new todo to check our new feature is working as expected. 
 
 Once we verify our feature is working as expected we can create a pull request to merge our feature branch into our main branch. We should then see our features in our production enviroment. 
 
