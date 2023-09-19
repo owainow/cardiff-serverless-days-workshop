@@ -326,7 +326,11 @@ We can then test our new application feature. Using static web apps we have crea
 
 We can now try filter and add a new todo to check our new feature is working as expected. 
 
-Once we verify our feature is working as expected we can create a pull request to merge our feature branch into our main branch. We should then see our features in our production enviroment. 
+Once we verify our feature is working as expected we can create a pull request to merge our feature branch into our main branch. We should then see our features in our production enviroment. We do this by creating a pull request. This can be done through the GitHub Portal by clicking Pull Request from the tabs, then selecting "Create new pull request" and selecting your feature branch to merge with your main branch. 
+<img width="1169" alt="image" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/6ed2b0a1-1b7c-4760-8da3-ba369edb9ab2">
+
+Once the pull request is created you can merge the pull request providing you have no merge conflicts at the bottom with the "Merge Pull Request" button & close your feature branch.
+
 
 ## 8. Conclusion 
 
