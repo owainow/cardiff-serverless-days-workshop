@@ -367,3 +367,61 @@ swa init
 ```
 
 Commit the new and updated files and push. In the portal for the SWA, you should now be able to navigate to the APIs section and see a Function App backend for the preview environment. Clicking on `(managed)` will give you a list of functions which should just include `helloworld` for now. These functions can now be used within the app.
+
+### Use the API in your app
+To do this we will go to `client/src/components/ToDoList.vue`. Note the changes include the lines above in the source files for positional reference.
+
+Change the header to use the API response
+
+```js
+    <header class="header">
+      <h1>{{ apiResponse }}</h1>
+```
+
+Add `apiResponse` to the data for the page.
+
+```js
+      userDetails: null,
+      apiResponse: ""
+```
+
+Add `created()` underneath the `data()` and call the API.
+
+```js
+  created() {
+   this.apiResponse = this.helloWorld('you');
+  },
+```
+Add the helloworld function after `pluralize` in `methods`
+
+```js
+    helloWorld: function(user) {
+      fetch(`/api/helloworld?name=${user}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/text",
+        },
+      })
+        .then((res) => {
+          return res.text();
+        })
+        .then((res) => {
+          this.apiResponse = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+```
+
+Save up, commit, and push!
+
+You can also do local testing with a combination of the `swa` and `func` CLIs if you would like to explore.
+
+### Additional challenges
+Try taking on these extra challenges depending on your skillset:
+- Database folks: create a graphql endpoint for your table
+  - Recommended docs include: [Quickstart: Use Data API builder with Azure SQL](https://learn.microsoft.com/en-us/azure/data-api-builder/get-started/get-started-azure-sql)
+- Front-end folks: Make the helloworld call use the the userDetails from the login activity
+- Backend/Infra folks: Move the Functions to a standalone resource and link the resource instead
+  - Recommended docs include: [Bring your own functions to Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own)
