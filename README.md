@@ -145,6 +145,8 @@ If you are following the tutorial names this will be cardiffserverless & C@rdiff
 ## 5. Run the pipeline
 
 The first time we trigger this pipeline we will use a manual trigger. To do this we will head to the Actions section at the top of the page. Then we will click on our Azure Static Web Apps workflow which has been created already and then click "Run Workflow". We can monitor the progress of the workflow by clicking into the running workflow and viewing the steps. 
+<img width="587" alt="image" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/c58a137e-2906-41be-ad71-af55c2b41fed">
+
 
 ## 6. Configure the Static Web App Database Connection
 
