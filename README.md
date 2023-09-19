@@ -74,10 +74,10 @@ Take note of that token as we will need it later for our GitHub Actions.
 
 ## 3. Create and configure the Azure SQL Database
 
-We can create a new Azure SQL server using the following command:
+We can create a new Azure SQL server using the following command (make sure to change `<rng>` to avoid naming collisions):
 
 ```shell
-az sql server create -n cardiff-serverless-days-db -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password CardiffS3rv3rless2023
+az sql server create -n cardiff-serverless-days-db<rng> -g cardiff-serverless-days -l uksouth --admin-user cardiffserverless --admin-password CardiffS3rv3rless2023
 ```
 We can then set our signed in user as the AD Admin. To do this we will require our user object id:
 
@@ -89,16 +89,16 @@ az ad signed-in-user show --query id -o tsv
 Then create the AD Admin for our server.
 
 ```shell
-az sql server ad-admin create --display-name <yourfirstname> --object-id <id> --server cardiff-serverless-days-db -g cardiff-serverless-days
+az sql server ad-admin create --display-name <yourfirstname> --object-id <id> --server cardiff-serverless-days-db<rng> -g cardiff-serverless-days
 ```
 
 We now need to ensure that Azure Services can connect to the created Azure SQL server:
 
 ```shell
-az sql server firewall-rule create -n AllowAllWindowsAzureIps -g cardiff-serverless-days --server cardiff-serverless-days-db --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+az sql server firewall-rule create -n AllowAllWindowsAzureIps -g cardiff-serverless-days --server cardiff-serverless-days-db<rng> --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
 ```
 
-This is an open firewall rule and certainly not advisable outside of the context of this workshop. To learn more  about how to configure an Azure SQL firewall click here: [Connections from inside Azure](https://learn.microsoft.com/azure/azure-sql/database/firewall-configure?view=azuresql#connections-from-inside-azure)
+This is an open firewall rule and certainly not advisable outside of the context of this workshop. To learn more about how to configure an Azure SQL firewall click here: [Connections from inside Azure](https://learn.microsoft.com/azure/azure-sql/database/firewall-configure?view=azuresql#connections-from-inside-azure)
 
 
 
