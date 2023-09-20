@@ -1,8 +1,8 @@
 # Cardiff Serverless Days Azure Workshop 2023
 
-A sample Todo app built with Vue.js that uses Azure Static Web Apps, Data API builder and Azure SQL Database.
+A sample Todo app built with Vue.js that uses Azure Static Web Apps, Data API builder, and Azure SQL Database.
 
-The Todo application allows to
+The Todo application allows you to
 
 - Create either public or private todos 
 - Update or delete todos
@@ -19,14 +19,11 @@ It uses the following features:
 ## Pre-Requisites 
 
 - Visual Studio Code or Prefered IDE
-
 - An Azure Subscription with Contributor Privileges
-
 - A GitHub Account
-
-- AZ CLI installed locally.
-
-If you do not have the AZ CLI installed this can be done quickly here: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+- AZ CLI [installed locally](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) or use the cloud shell in the [Azure Portal](https://portal.azure.com)
+- The Azure Static Web Apps VS Code extension
+ 
 
 # Workshop
 
@@ -341,3 +338,90 @@ Once we verify our feature is working as expected we can create a pull request t
 ## 8. Conclusion 
 
 Once on the app we can test our change and see how we are able to get and filter our todo's using the API built from our database! 
+
+## Bonus challenge - adding Azure Functions!
+We can use managed Azure Functions within Azure Static Web Apps to provide additional functionality to our applications. Let's use it to create an API that supplements our application.
+
+### Create the API using Azure Functions
+Repeat the git branching process and config update for anew branch called `helloworld`.
+
+- Use the command pallette (ctrl+shift+p)  to select the `Azure Static Web Apps: Create HTTP` action
+- Select your code preference (javascript is sensible for this project and v3)
+- Call the function helloworld
+
+Otherwise, you will need to create a new function project under `api` like, consider using the Azure Functions CLI (`func init`) if you have it:
+```files
+├── api
+│   ├── helloworld
+│   │   ├── function.json
+│   │   └── index.js
+│   ├── host.json
+│   ├── local.settings.json
+│   └── package.json
+```
+
+Update the `swa-cli.config.json` file with the api information. You may need to use the `Azure Static Web Apps: Install or Update the Azure Static Web Apps CLI` action via the command pallette if you do not have the `swa` CLI. When prompted use `dab-swa-todo` as the config name and make sure the other details look correct.
+
+```bash
+swa init
+```
+
+Commit the new and updated files and push. In the portal for the SWA, you should now be able to navigate to the APIs section and see a Function App backend for the preview environment. Clicking on `(managed)` will give you a list of functions which should just include `helloworld` for now. These functions can now be used within the app.
+
+### Use the API in your app
+To do this we will go to `client/src/components/ToDoList.vue`. Note the changes include the lines above in the source files for positional reference.
+
+Change the header to use the API response
+
+```js
+    <header class="header">
+      <h1>{{ apiResponse }}</h1>
+```
+
+Add `apiResponse` to the data for the page.
+
+```js
+      userDetails: null,
+      apiResponse: ""
+```
+
+Add `created()` underneath the `data()` and call the API.
+
+```js
+  created() {
+   this.apiResponse = this.helloWorld('you');
+  },
+```
+Add the helloworld function after `pluralize` in `methods`
+
+```js
+    helloWorld: function(user) {
+      fetch(`/api/helloworld?name=${user}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/text",
+        },
+      })
+        .then((res) => {
+          return res.text();
+        })
+        .then((res) => {
+          this.apiResponse = res;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+```
+
+Save up, commit, and push!
+
+You can also do local testing with a combination of the `swa` and `func` CLIs if you would like to explore.
+
+### Additional challenges
+Try taking on these extra challenges depending on your skillset:
+- Database folks: create a graphql endpoint for your table
+  - Recommended docs include: [Quickstart: Use Data API builder with Azure SQL](https://learn.microsoft.com/en-us/azure/data-api-builder/get-started/get-started-azure-sql)
+- Front-end folks: Make the helloworld call use the the userDetails from the login activity
+- Backend/Infra folks: Move the Functions to a standalone resource and link the resource instead
+  - Recommended docs include: [Bring your own functions to Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/functions-bring-your-own)
