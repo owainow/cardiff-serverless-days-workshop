@@ -9,7 +9,7 @@ The Todo application allows to
 - Mark a todo as completed
 - Drag and drop to reorder todos
 
-it uses the following features
+It uses the following features:
 
 - Backend REST API via Data API builder 
 - Authentication via Easy Auth configured to use GitHub
@@ -288,6 +288,7 @@ So that we can filter our workitems by what is in progress we also need to add t
 Add add the filter element to our webapp:
 
 ```vue
+...
         </li>
         <li>
           <a href="#/completed" @click="visibility = 'inprogress'"
@@ -315,5 +316,22 @@ Finally we then need to add the inprogressTodo function so that we can make call
       });
     },
 
-    ```
-    If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
+```
+
+If you would instead like to copy the full final with the code changes already made please copy and paste the full contents of "finalToDoList.vue" from the Client folder in your repository. 
+
+We can then test our new application feature. Using static web apps we have created our development enviroment which can be accessed by clicking on the "Enviroments" tab in your static web app and clicking browse on the development enviroment. We could also split traffic between enviroments if we wanted too.
+
+<img width="562" alt="app" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/a4d6d8f7-1f28-48fd-960e-8be8a931db0c">
+
+We can now try filter and add a new todo to check our new feature is working as expected. 
+
+Once we verify our feature is working as expected we can create a pull request to merge our feature branch into our main branch. We should then see our features in our production enviroment. We do this by creating a pull request. This can be done through the GitHub Portal by clicking Pull Request from the tabs, then selecting "Create new pull request" and selecting your feature branch to merge with your main branch. 
+<img width="1169" alt="image" src="https://github.com/owainow/cardiff-serverless-days-workshop/assets/48108258/6ed2b0a1-1b7c-4760-8da3-ba369edb9ab2">
+
+Once the pull request is created you can merge the pull request providing you have no merge conflicts at the bottom with the "Merge Pull Request" button & close your feature branch.
+
+
+## 8. Conclusion 
+
+Once on the app we can test our change and see how we are able to get and filter our todo's using the API built from our database! 
